@@ -1,5 +1,7 @@
 const conectionDatabse = require('../db');
 const bcrypt = require('bcrypt');
+const jsonWebToken = require('jsonwebtoken');
+const { json } = require('body-parser');
 
 exports.registerUsuario = async (req, res, next) => {
     bcrypt.hash(req.body.senha, 10, (erro, hash) => {
@@ -23,12 +25,37 @@ exports.registerUsuario = async (req, res, next) => {
         }
     })
 }
+exports.loginUsuario = async (req, res, next) => {
+    try {
+        const result = await conectionDatabse.queryMysql('select * from usuario where email = ?;', req.body.email)
+        if (result < 1) {
+            res.status(401).send({ message: "Email não encontrado!" });
+        } else {
+            bcrypt.compare(req.body.senha, result[0].senha, (err, results) => {
+                if (err) {
+                    return res.status(401).send({
+                        erro: err
+                    })
+                }
+                if (results) {
+                    const token = jsonWebToken.sign({
+                        id_usuario: result[0].id_usuario,
+                        email: result[0].email
+                    }, process.env.JWT_KEY, {
+                        expiresIn: '1h'
+                    })
+                    res.status(200).send({
+                        message: "Usuário logado com sucesso!",
+                        token: token
+                    })
+                }
+                return res.status(401).send({
+                    message: "Falha na autentificação"
+                })
+            })
 
+        }
+    } catch (e) {
 
-
-
-exports.loginUsuario = (req, res, next) => {
-    res.status(200).send({
-        message: "Welcome login user"
-    })
+    }
 }

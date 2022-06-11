@@ -4,6 +4,9 @@
         "PASSWORD": "123456",
         "USER": "root",
         "HOST": "localhost",
-        "PORT": 4000
+        "PORT": 4000,
+
+        "JWT_KEY": "MINHAASSINATURA"
+
     }
 }
