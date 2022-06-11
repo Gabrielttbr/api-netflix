@@ -1,0 +1,22 @@
+{
+  "name": "netflix-api",
+  "version": "1.0.0",
+  "description": "Api rest netflix",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon serve.js"
+  },
+  "keywords": [
+    "netflix"
+  ],
+  "author": "Gabriel Carlos Cavalcante",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.16"
+  }
+}

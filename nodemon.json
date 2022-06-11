@@ -1,0 +1,9 @@
+{
+    "env": {
+        "DATABASE": "netflix",
+        "PASSWORD": "123456",
+        "USER": "root",
+        "HOST": "localhost",
+        "PORT": 4000
+    }
+}
