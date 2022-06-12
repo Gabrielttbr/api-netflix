@@ -29,9 +29,9 @@ exports.loginUsuario = async (req, res, next) => {
     try {
         const result = await conectionDatabse.queryMysql('select * from usuario where email = ?;', req.body.email)
         if (result < 1) {
-            res.status(401).send({ message: "Email não encontrado!" });
+            return res.status(401).send({ message: "Email não encontrado!" });
         } else {
-            bcrypt.compare(req.body.senha, result[0].senha, (err, results) => {
+            return bcrypt.compare(req.body.senha, result[0].senha, (err, results) => {
                 if (err) {
                     return res.status(401).send({
                         erro: err
@@ -44,7 +44,7 @@ exports.loginUsuario = async (req, res, next) => {
                     }, process.env.JWT_KEY, {
                         expiresIn: '1h'
                     })
-                    res.status(200).send({
+                    return res.status(200).send({
                         message: "Usuário logado com sucesso!",
                         token: token
                     })
@@ -56,6 +56,8 @@ exports.loginUsuario = async (req, res, next) => {
 
         }
     } catch (e) {
-
+        return res.status(500).send({
+            erro: e
+        })
     }
 }

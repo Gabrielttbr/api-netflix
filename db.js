@@ -21,7 +21,7 @@ exports.queryMysql = (query, param=[]) => {
                     return reject(error)
                 }
                 else {
-                    resolve(result)
+                    return resolve(result)
                 }
             })
         })
