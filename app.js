@@ -9,9 +9,10 @@ const routerUser = require('./router/user.router');
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "GET, POST, PUT, PATCH, DELETE");
-    app.use(cors())
-    next()
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE,PATCH");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    app.use(cors());
+    next();
 })
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false })) // ACEITA APENAS DADOS SIMPLES
