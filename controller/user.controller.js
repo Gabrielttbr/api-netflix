@@ -4,24 +4,32 @@ const jsonWebToken = require('jsonwebtoken');
 const { json } = require('body-parser');
 
 exports.registerUsuario = async (req, res, next) => {
-    bcrypt.hash(req.body.senha, 10, (erro, hash) => {
+    bcrypt.hash(req.body.senha, 10, async (erro, hash) => {
         if (erro) {
             return res.status(500).send({
                 error: erro
             })
         } else {
-            conectionDatabse.queryMysql('insert into usuario (id_usuario, nome, email, senha, cpf, cep, endereco) values (default, ?,?,?,?,?,?);',
-                [req.body.nome, req.body.email, hash, req.body.cpf, req.body.cep, req.body.endereco])
-                .then((result) => {
-                    res.status(200).send({
-                        message: result
-                    })
-                }).catch((e) => {
-                    res.status(500).send({
-                        erro: e
-                    }
-                    )
+            const result = await conectionDatabse.queryMysql('select email from usuario where email = ?;', req.body.email)
+            console.log(result)
+            if(result.length>0){
+               return res.status(409).send({
+                    message: "Email já cadastrado",
                 })
+            }else{      
+                conectionDatabse.queryMysql('insert into usuario (id_usuario, nome, email, senha, cpf, cep, endereco) values (default, ?,?,?,?,?,?);',
+                    [req.body.nome, req.body.email, hash, req.body.cpf, req.body.cep, req.body.endereco])
+                    .then((result) => {
+                        res.status(200).send({
+                            message: result
+                        })
+                    }).catch((e) => {
+                        res.status(500).send({
+                            erro: e
+                        }
+                        )
+                    })
+            }
         }
     })
 }
