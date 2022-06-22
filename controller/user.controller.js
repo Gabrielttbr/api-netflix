@@ -11,7 +11,6 @@ exports.registerUsuario = async (req, res, next) => {
             })
         } else {
             const result = await conectionDatabse.queryMysql('select email from usuario where email = ?;', req.body.email)
-            console.log(result)
             if(result.length>0){
                return res.status(409).send({
                     message: "Email já cadastrado",
@@ -69,3 +68,29 @@ exports.loginUsuario = async (req, res, next) => {
         })
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
