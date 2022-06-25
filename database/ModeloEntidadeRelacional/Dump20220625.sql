@@ -18,6 +18,32 @@ USE `netflix`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `filme`
+--
+
+DROP TABLE IF EXISTS `filme`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `filme` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(15) NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `imagem` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `filme`
+--
+
+LOCK TABLES `filme` WRITE;
+/*!40000 ALTER TABLE `filme` DISABLE KEYS */;
+INSERT INTO `filme` VALUES (3,'Américas dois','Sexo e drogas','https://occ-0-1306-185.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBJUa3L0oCdqYFCwmgQkDf_1mnjOzpc0rnipmEzJk2KQGlygNlvI-0ypvICslYgxG4GJzuJd3cUbhpT0L58JJnh9ikOzAg4J6qsoxvDSuXARsGD90fWUfzen8lxD28Buwqd.jpg?r=7c1'),(4,'Américas dois','','https://occ-0-1306-185.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBJUa3L0oCdqYFCwmgQkDf_1mnjOzpc0rnipmEzJk2KQGlygNlvI-0ypvICslYgxG4GJzuJd3cUbhpT0L58JJnh9ikOzAg4J6qsoxvDSuXARsGD90fWUfzen8lxD28Buwqd.jpg?r=7c1');
+/*!40000 ALTER TABLE `filme` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuario`
 --
 
@@ -57,4 +83,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-25 13:19:16
+-- Dump completed on 2022-06-25 17:24:36
