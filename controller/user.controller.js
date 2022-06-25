@@ -1,7 +1,7 @@
 const conectionDatabse = require('../db');
 const bcrypt = require('bcrypt');
 const jsonWebToken = require('jsonwebtoken');
-const { json } = require('body-parser');
+
 
 exports.registerUsuario = async (req, res, next) => {
     bcrypt.hash(req.body.senha, 10, async (erro, hash) => {
