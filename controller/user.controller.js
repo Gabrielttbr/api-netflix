@@ -7,24 +7,28 @@ exports.registerUsuario = async (req, res, next) => {
     bcrypt.hash(req.body.senha, 10, async (erro, hash) => {
         if (erro) {
             return res.status(500).send({
-                error: erro
+                message: "Erro in serve",
+                response: erro
             })
         } else {
             const result = await conectionDatabse.queryMysql('select email from usuario where email = ?;', req.body.email)
             if(result.length>0){
                return res.status(409).send({
-                    message: "Email já cadastrado",
+                    message: "E-mail already registered",
+                    response: result
                 })
             }else{      
                 conectionDatabse.queryMysql('insert into usuario (id_usuario, nome, email, senha, cpf, cep, endereco) values (default, ?,?,?,?,?,?);',
                     [req.body.nome, req.body.email, hash, req.body.cpf, req.body.cep, req.body.endereco])
                     .then((result) => {
                         res.status(200).send({
-                            message: result
+                            message: "User insert into witch sucess",
+                            respose: result
                         })
                     }).catch((e) => {
                         res.status(500).send({
-                            erro: e
+                            message: "Erro in serve",
+                            response: e
                         }
                         )
                     })
@@ -36,12 +40,16 @@ exports.loginUsuario = async (req, res, next) => {
     try {
         const result = await conectionDatabse.queryMysql('select * from usuario where email = ?;', req.body.email)
         if (result < 1) {
-            return res.status(401).send({ message: "Email não encontrado!" });
+            return res.status(401).send({ 
+                message: "Email not fould!",
+                response: result
+             });
         } else {
             return bcrypt.compare(req.body.senha, result[0].senha, (err, results) => {
                 if (err) {
                     return res.status(401).send({
-                        erro: err
+                        message: "Erro in authentication",
+                        response: err
                     })
                 }
                 if (results) {
@@ -53,18 +61,21 @@ exports.loginUsuario = async (req, res, next) => {
                     })
                     return res.status(200).send({
                         message: "Usuário logado com sucesso!",
+                        response: result,
                         token: token
                     })
                 }
                 return res.status(401).send({
-                    message: "Falha na autentificação"
+                    message: "Erro in authentication",
+                    response: []
                 })
             })
 
         }
     } catch (e) {
         return res.status(500).send({
-            erro: e
+            message: "Erro in serve",
+            response: e
         })
     }
 }
