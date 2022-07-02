@@ -57,7 +57,7 @@ exports.loginUsuario = async (req, res, next) => {
                         id_usuario: result[0].id_usuario,
                         email: result[0].email
                     }, process.env.JWT_KEY, {
-                        expiresIn: '1h'
+                        expiresIn: '6h'
                     })
                     return res.status(200).send({
                         message: "Usuário logado com sucesso!",

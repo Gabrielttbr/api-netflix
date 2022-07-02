@@ -18,10 +18,10 @@ exports.queryMysql = (query, param=[]) => {
             con.release();
             this.conection.query(query, param, (error, result) => {
                 if(error){
-                    return reject(error)
+                    return reject(error);
                 }
                 else {
-                    return resolve(result)
+                    return resolve(result);
                 }
             })
         })

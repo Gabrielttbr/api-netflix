@@ -3,7 +3,7 @@ const mysql = require('../db');
 exports.post = async(req, res, next) => {
     try {
         const result = await mysql.queryMysql('insert into banner values (default, ?,?,?,?);', 
-        [req.body.titulo, req.body.descricao, req.body.status, req.body.imagem]);
+        [req.body.titulo, req.body.descricao,  req.body.imagem, req.body.status]);
         res.status(200).send({
             message: "Banner insert into sucess",
             response: result

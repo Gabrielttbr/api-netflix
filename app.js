@@ -7,7 +7,8 @@ const cors = require('cors');
 // Routers
 const routerUser = require('./router/user.router');
 const routerFilme = require('./router/filme.router');
-const routerBanner = require('./router/banner.router')
+const routerBanner = require('./router/banner.router');
+const routerSerie = require('./router/serie.router');
 
 
 
@@ -25,8 +26,12 @@ app.use(bodyParser.json())// JSON DE ENTRADA BODY_PARSER
 
 
 app.use('/user', routerUser);
-app.use('/filme', routerFilme)
-app.use('/banner', routerBanner)
+app.use('/filme', routerFilme);
+app.use('/banner', routerBanner);
+app.use('/serie', routerSerie);
+
+
+
 app.use((req,res,next) =>{
     res.status(404).send({
         message: "NOT FOUT"
