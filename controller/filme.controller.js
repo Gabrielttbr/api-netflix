@@ -5,7 +5,7 @@ exports.getFilme = async (req, res, next) => {
         const result = await mysql.queryMysql('select * from filme;');
         res.status(200).send({
             message: "Get all filme",
-            respose: result
+            response: result
         })
     }catch(e){
         res.status(500).send({
