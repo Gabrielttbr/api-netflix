@@ -1,21 +1,23 @@
 version: "3.1"
 services: 
-  db: 
+  api-flix: 
+    build: './'
+    command: npm start
+    restart: always 
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    env_file:
+      - .env
+    depends_on:
+      - db-flix
+    ports:
+      - "3000:3000"
+  db-flix: 
     build:
       context: './database'
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     env_file:
-      - nodemon.json
+      - .env
     ports:
       - "3306:3306"
-  api: 
-    build: './'
-    command: nodemon start
-    restart: always
-    env_file:
-      - nodemon.json
-    depends_on:
-      - db
-    ports:
-      - "3000:3000"

@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
-
+const env = require('dotenv').config()
 // Routers
 const routerUser = require('./router/user.router');
 const routerFilme = require('./router/filme.router');
