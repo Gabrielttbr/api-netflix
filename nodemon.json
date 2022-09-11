@@ -3,8 +3,8 @@
         "DATABASE": "netflix",
         "PASSWORD": "root",
         "USER": "root",
-        "HOST": "localhost",
-        "PORT": 3000,
+        "HOST": "db-flix",
+        "PORT": 4000,
 
         "JWT_KEY": "MINHAASSINATURA"
 

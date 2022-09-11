@@ -11,7 +11,7 @@ services:
     depends_on:
       - db-flix
     ports:
-      - "3000:3000"
+      - "4000:4000"
   db-flix: 
     build:
       context: './database'
